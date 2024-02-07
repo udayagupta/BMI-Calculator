@@ -1,0 +1,49 @@
+.normal:hover {
+    color: white;
+    background-color:  rgb(3, 151, 3);
+}
+
+.under-weight:hover {
+    color: white;
+    background-color:  blue;
+}
+
+.over-weight:hover {
+    color: white;
+    background-color:  orangered;
+}
+.obese:hover {
+    color: white;
+    background-color:  rgb(187, 34, 34);
+}
+
+.over-obese:hover {
+    color: white;
+    background-color:  rgb(255, 0, 0);
+}
+
+/* Background Colors */
+.bg-under-weight {
+    color: white;
+    background-color:  blue;
+}
+
+.bg-normal {
+    color: white;
+    background-color:  rgb(3, 151, 3);
+}
+
+.bg-over-weight {
+    color: white;
+    background-color:  orangered;
+}
+
+.bg-obese {
+    color: white;
+    background-color:  rgb(187, 34, 34);
+}
+
+.bg-over-obese {
+    color: white;
+    background-color:  rgb(255, 0, 0);
+}
