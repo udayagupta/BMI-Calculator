@@ -6,17 +6,37 @@ let height = document.querySelector("#height");
 let bmi_value = document.querySelector(".bmi-value");
 let reset = document.querySelector(".reset");
 
-
 button.addEventListener("click", () => {
-    if (weight.value === "" || height.value === "") {
+    
+    meter_values.forEach(e => {
+        let classList = e.classList;
+
+        if (classList.length === 3) {
+            let lastClass = classList[classList.length - 1];
+            e.classList.remove(lastClass);
+        }        
+    });
+
+    if (weight.value === "" && height.value === "") {
         weight.style.borderColor = "red";
         height.style.borderColor = "red";
         return false;
     }
 
+    if (weight.value === "") weight.style.borderColor = "red";
+    if (height.value === "") height.style.borderColor = "red";
+        
     let bmi = calculate_bmi(weight.value, height.value);
 
-    if (bmi && bmi !== "NaN") bmi_value.textContent = bmi;
+    if (bmi && bmi !== "NaN") {
+        bmi_value.textContent = bmi;
+        weight.value = "";
+        height.value = "";
+        weight.style.borderColor = "gray";
+        height.style.borderColor = "gray";
+        // button.style.display = "none";
+        // reset.style.display = "block";
+    }
 
 
     // [div.meter-value.normal, div.meter-value.under-weight, div.meter-value.over-weight, div.meter-value.obese, div.meter-value.over-obese]
@@ -33,7 +53,7 @@ button.addEventListener("click", () => {
     }
 
     else if (bmi >= 30 && bmi < 39.9) {
-        meter_values[3].classList.togglr("bg-obese")
+        meter_values[3].classList.toggle("bg-obese")
     }
 
     else if (bmi >= 40) {
@@ -41,44 +61,47 @@ button.addEventListener("click", () => {
     }
 
     
-    button.style.display = "none";
-    reset.style.display = "block";
+    // button.style.display = "none";
+    // reset.style.display = "block";
+    
+    
 });
 
 
-reset.addEventListener("click", () => {
+// reset.addEventListener("click", () => {
     
 
-    if (weight.value !== "" && height.value !== "") {
-        bmi_value.innerHTML = "";
-        weight.value = "";
-        height.value = "";
-        button.style.display = "block";
-        reset.style.display = "none";
-        weight.style.borderColor = "gray";
-        height.style.borderColor = "gray";
+//     if (toggle_reset) {
+//         bmi_value.innerHTML = "";
+//         weight.value = "";
+//         height.value = "";
+//         button.style.display = "block";
+//         reset.style.display = "none";
+//         
 
-        meter_values.forEach(e => {
+//         meter_values.forEach(e => {
             
-            let classList = e.classList;
+//             let classList = e.classList;
 
-            if (classList.length === 3) {
-                let lastClass = classList[classList.length - 1];
-                e.classList.remove(lastClass);
-            }
+//             if (classList.length === 3) {
+//                 let lastClass = classList[classList.length - 1];
+//                 e.classList.remove(lastClass);
+//             }
 
             
-        });
-    } else return false;
-});
+//         });
+//     } else return false;
+// });
 
 
-function calculate_bmi(weight, height) {
-    if (weight <= 0 || height <= 0) return false;
-
-    let height_in_m = height / 100;
-
-    let bmi = weight / (height_in_m * height_in_m);
-
-    return bmi.toFixed(2);
+function calculate_bmi(weightValue, heightValue) {
+    if (weightValue <= 0 || heightValue <= 0) {
+        alert("Negatives are not allowed!");
+        weight.value = "";  
+        height.value = "";  
+    } else {
+        let height_in_m = heightValue / 100;
+        let bmi = weightValue / (height_in_m * height_in_m);
+        return bmi.toFixed(2);
+    }
 }
