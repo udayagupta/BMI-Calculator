@@ -17,14 +17,16 @@ button.addEventListener("click", () => {
         }        
     });
 
-    if (weight.value === "" && height.value === "") {
+    if ((weight.value === "" && height.value === "") || (weight.value < 0 && height.value < 0)) {
         weight.style.borderColor = "red";
         height.style.borderColor = "red";
         return false;
     }
 
-    if (weight.value === "") weight.style.borderColor = "red";
-    if (height.value === "") height.style.borderColor = "red";
+    
+
+    if (weight.value === "" || weight.value < 0) weight.style.borderColor = "red";
+    if (height.value === ""|| height.value < 0) height.style.borderColor = "red";
         
     let bmi = calculate_bmi(weight.value, height.value);
 
@@ -96,9 +98,11 @@ button.addEventListener("click", () => {
 
 function calculate_bmi(weightValue, heightValue) {
     if (weightValue <= 0 || heightValue <= 0) {
-        alert("Negatives are not allowed!");
-        weight.value = "";  
-        height.value = "";  
+        // alert("Invalid Inputs!");
+        // weight.value = "";  
+        // height.value = "";
+        // bmi_value.textContent = "";  
+        return false
     } else {
         let height_in_m = heightValue / 100;
         let bmi = weightValue / (height_in_m * height_in_m);
