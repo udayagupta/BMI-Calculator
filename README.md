@@ -20,7 +20,6 @@ Users should be able to:
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
 - Enter their details and get their BMI, and also the category they fall into will get highlighted in the BMI Meter
-- Reset the inputs
 
 ### Screenshot
 
